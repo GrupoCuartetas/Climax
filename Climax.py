@@ -19,11 +19,14 @@ def menu() :
         print("Seleccione una opcion")
         print("1)temperatura")
         print("2)Elegir medida de temperatura")
+        print("3)Pronostico de los proximos dias")
         opcion=input()
         if opcion== "1":
             tempminymax()
         elif opcion== "2":
             ugradual()    
+        elif opcion=="3":
+            pronosticoDias()
         elif opcion!= "0":
             break            
 def tempminymax():
@@ -44,4 +47,16 @@ def tempminymax():
         menu()
     else:
         exit()
+def pronosticoDias():
+    print("Ingrese su ciudad")
+    ciudad=input()
+    Urlciudad=f"https://api.openweathermap.org/data/2.5/forecast?q={ciudad}&appid={api_key}&units={grados}"
+    info=requests.get(Urlciudad)
+    infojson=info.json()
+    for forecast in infojson['list']:
+        date = forecast['dt_txt']  
+        temperature = forecast['main']['temp']
+        description = forecast['weather'][0]['description']
+        if (date.endswith('12:00:00')):
+            print(f"{date}: {temperature}°C, {description}")
 menu()
