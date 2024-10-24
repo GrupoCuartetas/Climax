@@ -39,25 +39,21 @@ def menu():
             mostrarHistorial()    
         else:
             print("Opción no válida. Saliendo del programa.")
-            vaciar_historial()
             break
 
 
 #-----------------------------------------------------------------------------------------------------------------#         
-def guardar_solicitud(consulta):
+def guardar_solicitud(consulta, resultado):
     with open("Historial.txt", "a") as f:
-        f.write(f"Consulta: {consulta}\n")
+        f.write(f"Consulta: {consulta} - {resultado}\n")
 
-#-----------------------------------------------------------------------------------------------------------------# 
-def vaciar_historial():
-    open("Historial.txt", "w").close()
 
 #-----------------------------------------------------------------------------------------------------------------#        
 def tempminymax():
     print("Ingrese su ciudad")
     ciudad = input()
     Urlciudad = f"https://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}&units={grados}"
-    guardar_solicitud(ciudad)
+    
     try:
         info = requests.get(Urlciudad)
         info.raise_for_status()  # Lanza un error si la respuesta fue un error HTTP
@@ -70,13 +66,11 @@ def tempminymax():
         print(f"La temperatura en {ciudad} es de {temp}")
         print(f"La temperatura mínima es de {min_temp}")
         print(f"La temperatura máxima es de {max_temp}")
+
+        guardar_solicitud(ciudad, temp)
         
     except requests.exceptions.HTTPError as http_err:
         print(f"Error HTTP: {http_err}")
-    except requests.exceptions.RequestException as req_err:
-        print(f"Error de solicitud: {req_err}")
-    except KeyError:
-        print("No se pudo obtener información de la ciudad. Verifique el nombre e intente nuevamente.")
     
     print("Desea volver al menú? escribiendo 'si', volverá, de lo contrario saldrá del programa")
     volver = input().lower()
@@ -92,7 +86,7 @@ def pronosticoDias():
     print("Ingrese su ciudad")
     ciudad = input()
     Urlciudad = f"https://api.openweathermap.org/data/2.5/forecast?q={ciudad}&appid={api_key}&units={grados}"
-    guardar_solicitud(ciudad)
+    guardar_solicitud(ciudad, "")
     try:
         info = requests.get(Urlciudad)
         info.raise_for_status()  # Lanza un error si la respuesta fue un error HTTP
@@ -107,10 +101,6 @@ def pronosticoDias():
                
     except requests.exceptions.HTTPError as http_err:
         print(f"Error HTTP: {http_err}")
-    except requests.exceptions.RequestException as req_err:
-        print(f"Error de solicitud: {req_err}")
-    except KeyError:
-        print("No se pudo obtener pronósticos. Verifique el nombre de la ciudad.")
        
 
 
@@ -122,7 +112,7 @@ def mostrarHistorial():
             if historial:
                 print("\nHistorial de Consultas:")
                 for linea in historial:
-                    print(linea.strip())
+                    print(linea.strip() + "°C")
             else:
                 print("El historial está vacío.")
     except FileNotFoundError:
