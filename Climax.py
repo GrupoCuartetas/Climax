@@ -83,24 +83,25 @@ def tempminymax():
 
 #------------------------------------------------------------------------------------------------#   
 def pronosticoDias():
-    print("Ingrese su ciudad")
-    ciudad = input()
-    Urlciudad = f"https://api.openweathermap.org/data/2.5/forecast?q={ciudad}&appid={api_key}&units={grados}"
-    guardar_solicitud(ciudad, "")
-    try:
-        info = requests.get(Urlciudad)
-        info.raise_for_status()  # Lanza un error si la respuesta fue un error HTTP
-        infojson = info.json()
+   while true:
+        print("Ingrese su ciudad")
+        ciudad = input()
+        Urlciudad = f"https://api.openweathermap.org/data/2.5/forecast?q={ciudad}&appid={api_key}&units={grados}"
+        guardar_solicitud(ciudad, "")
+        try:
+            info = requests.get(Urlciudad)
+            info.raise_for_status()  # Lanza un error si la respuesta fue un error HTTP
+            infojson = info.json()
         
-        for forecast in infojson['list']:
-            date = forecast['dt_txt']  
-            temperature = forecast['main']['temp']
-            description = forecast['weather'][0]['description']
-            if date.endswith('12:00:00'):
-                print(f"{date}: {temperature}°C, {description}")
-               
-    except requests.exceptions.HTTPError as http_err:
-        print(f"Error HTTP: {http_err}")
+            for forecast in infojson['list']:
+                date = forecast['dt_txt']  
+                temperature = forecast['main']['temp']
+                description = forecast['weather'][0]['description']
+                if date.endswith('12:00:00'):
+                    print(f"{date}: {temperature}°C, {description}")
+             break  
+        except requests.exceptions.HTTPError as http_err:
+            print(f"Error HTTP: {http_err}")
        
 
 
