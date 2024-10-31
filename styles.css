@@ -1,0 +1,18 @@
+.formulario{
+    border-style: solid;    
+    color: black;
+    width: 400px;
+    height: 250px;
+    border-width: 1px;
+    border-radius: 5%;
+    text-align: center;
+    width: 20em; 
+}
+body{
+
+    align-items: center;
+    justify-content: center;
+    margin: 500px;
+
+
+}
