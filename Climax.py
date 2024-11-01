@@ -1,4 +1,5 @@
 import datetime
+
 import re
 import secrets
 from flask import Flask, redirect, request, render_template, session, url_for
@@ -143,6 +144,8 @@ pais=""
 app=Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 historial = []
+pronosticos = {}
+
 
 codigoPaises = {
     "AR": "Argentina",
@@ -194,6 +197,15 @@ codigoPaises = {
     "VE": "Venezuela",
     "VN": "Vietnam"
 }
+dias = {
+    'Monday': 'Lunes',
+    'Tuesday': 'Martes',
+    'Wednesday': 'Miércoles',
+    'Thursday': 'Jueves',
+    'Friday': 'Viernes',
+    'Saturday': 'Sábado',
+    'Sunday': 'Domingo'
+}
 
 def borrarCaractes(palabra):
     return re.sub(r'[^a-zA-Z]', '', palabra)
@@ -240,8 +252,8 @@ def home():
                 consulta = {
                         "fecha": datetime.datetime.now().strftime("%d/%m/%Y"),
                         "hora" : datetime.datetime.now().strftime("%H:%M"),
-                        "pais": pais,
-                        "ciudad": ciudad,
+                        "pais": pais.upper(),
+                        "ciudad": ciudad.upper(),
                         "temp": f"{temperatura}{gradosEnAbreviatura(grados)}"
                     }
 
@@ -284,6 +296,40 @@ def mostrar_historial():
     global historial, ciudad, temperatura, max_temp, min_temp, pais  
     return render_template("historial.html", historial=historial, ciudad=ciudad.upper(), temperatura=temperatura, pais=pais, max_temp=max_temp, min_temp=min_temp)
 
+@app.route('/pronosticos')
+def mostrar_pronosticos():
+    global pronosticos, grados, historial, ciudad, temperatura, max_temp, min_temp, pais
+    ciudad = request.args.get("ciudad", "")
+    Urlciudad = f"https://api.openweathermap.org/data/2.5/forecast?q={ciudad}&appid={api_key}&units={grados}"
+    
+    try:
+        info = requests.get(Urlciudad)
+        info.raise_for_status()
+        infojson = info.json()
 
+        pronosticos[ciudad] = []
+        
+        for forecast in infojson['list']:
+            date = forecast['dt_txt']
+            fecha = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            dia_ingles = fecha.strftime('%A')
+            dia = dias[dia_ingles]
+            temperature = forecast['main']['temp']
+            min_temp=forecast['main']['temp_min']
+            max_temp=forecast['main']['temp_max']
+            description = forecast['weather'][0]['description']
+            if date.endswith('12:00:00'):
+                pronosticos[ciudad].append({
+                    'date': dia,
+                    'temperature': temperature,
+                    'min_temp':min_temp,
+                    'max_temp':max_temp,
+                    'description': description
+                })
+        
+        return render_template('pronostico.html', ciudad=ciudad, pronosticos=pronosticos[ciudad], temperatura=temperatura, pais=pais, max_temp=max_temp, min_temp=min_temp, grados=gradosEnAbreviatura(grados))
+    except requests.exceptions.HTTPError as http_err:
+        return f"Error HTTP: {http_err}"
+     
 if __name__ == "__main__":
     app.run(debug=True)

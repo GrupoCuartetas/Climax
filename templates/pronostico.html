@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>WeatherWise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="panelSuperior">
+        <img src="{{url_for('static', filename='icono.png')}}" alt="Icono WeatherWise" class="icon">
+        <h1>WeatherWise</h1>
+        
+    </div>
+    <div class="forecast-container">
+        {% for pronostico in pronosticos %}
+            <div class="forecast-block">
+                <div class="imgtemperatura">
+                    <p>{{pronostico.date}}</p>
+                </div>
+                <div class="temperatura">
+                    <p>{{pronostico.temperature}}{{grados}}</p>
+                    <p>Mín: {{ pronostico.min_temp }}{{grados}}</p>
+                    <p>Máx: {{ pronostico.max_temp }}{{grados}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('temp',ciudad=ciudad, temperatura=temperatura, pais=pais, max_temp=max_temp, min_temp=min_temp) }}">Volver</a>
+</body>
+</html>

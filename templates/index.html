@@ -3,15 +3,23 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Página de Inicio</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>WeatherWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1 class="titulo">Climax</h1>
-    <form action="/" method="POST">
-        <label for="ciudad">Ingrese su ciudad:</label>
-        <input type="text" id="ciudad" name="ciudad" required>
-        <button type="submit">Consultar Clima</button>
-    </form>
+    <div class="panelSuperior">
+        <img src="{{url_for('static', filename='icono.png')}}" alt="Icono WeatherWise" class="icon">
+        <h1>WeatherWise</h1>
+    </div>
+    <div class="contenedorFormulario">
+        <section class="formulario">
+            <h3>¡Bienvenido!</h3>
+            <form action="/" method="POST" class="form">
+                <div><label for="ciudad"><p>Ingrese una ciudad</p></label></div>
+                <div> <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" required></div>
+                <div><button type="submit">Consultar Clima</button></div>
+            </form>
+        </section>
+    </div>
 </body>
 </html>
