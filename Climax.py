@@ -281,13 +281,15 @@ def temp():
 def cambiar_unidad():
     global grados,historial, ciudad, temperatura, max_temp, min_temp, pais  
     grados = request.form.get("grados")
-    Urlciudad = f"https://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}&units={grados}"
-    info = requests.get(Urlciudad)
-    infojson = info.json()
     
-    temperatura = infojson["main"]["temp"]
-    min_temp = infojson["main"]["temp_min"]
-    max_temp = infojson["main"]["temp_max"]
+    if grados=="metric":
+         temperatura=temperatura
+         min_temp=min_temp
+         max_temp=max_temp
+    elif grados=="imperial":
+        temperatura = temperatura+33.8 
+        min_temp = min_temp+33.8
+        max_temp = max_temp+33.8       
     
     return redirect(url_for('temp', ciudad=ciudad.upper(), temperatura=temperatura, pais=pais, max_temp=max_temp, min_temp=min_temp, grados=gradosEnAbreviatura(grados)))
 
@@ -332,4 +334,4 @@ def mostrar_pronosticos():
         return f"Error HTTP: {http_err}"
      
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

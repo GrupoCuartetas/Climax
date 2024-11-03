@@ -41,7 +41,7 @@ h1{
     font-family: math;
     font-weight: bolder;
     font-stretch: expanded;
-    font-size: 3.3em;
+    font-size: 3.5em;
     color: rgb(210, 210, 210);
     text-align: center;
 
@@ -78,9 +78,10 @@ p{
 
 }
 body{
-    height: 98vh;
+    height: 100vh;
     margin: 0;
     background-image: url(/static/Vector_20180705_009.jpg);
+    background-attachment: fixed; 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
