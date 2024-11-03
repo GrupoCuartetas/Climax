@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>WeatherWise</title>
+</head>
+<body>
+    <div class="panelSuperior">
+        <img src="{{url_for('static', filename='icono.png')}}" alt="Icono WeatherWise" class="icon">
+        <h1>WeatherWise</h1>
+    </div>
+    <h1>Historial de consultas</h1>
+    <section id="queryLog">
+        {% for consulta in historial %}
+        <div class="containLog">
+            <div class="logItems">
+               <h4>{{consulta.fecha}}</h4>
+            </div>
+            <div class="logItems">
+                <h4>{{consulta.hora}}</h4>
+            </div>
+            <div class="logItems">
+                <h4>{{consulta.pais}}</h4>
+            </div>
+            <div class="logItems">
+                <h4>{{consulta.ciudad}}</h4>
+            </div>
+            <div class="logItems">
+                <h4 class="temp">{{consulta.temp}}{{consulta.grados}}</h4>
+            </div>
+        </div>
+        {% endfor %}
+        <a href="{{ url_for('temp',ciudad=ciudad, temperatura=temperatura, pais=pais, max_temp=max_temp, min_temp=min_temp) }}">Volver</a>
+    </section>
+  
+</body>
+</html>
