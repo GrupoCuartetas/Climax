@@ -45,6 +45,15 @@
                 <img src="{{ url_for('static', filename='thermometer.png') }}" alt="" class="imgDetalles">
                 <p>{{sensacionT}}{{gradosAb}}</p>
             </div>
+            <div class="separacionDetalles">
+                {% if nubosidad == 'Clear' %}
+                <p>Cielo despejado</p>
+                {% elif nubosidad == 'Clouds' %}
+                <p>Cielo nublado</p>
+                {% elif nubosidad == 'Rain' %}
+                <p>Lloviendo</p>
+                {%endif%}
+            </div>
         </div>
         <div class="opciones">
             <a href="{{url_for('mostrar_pronosticos',ciudad=ciudad) }}" class="boton">Pronósticos</a>
