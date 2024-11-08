@@ -90,16 +90,16 @@ def borrarCaractes(ciudad):
     if ciudad:
         return ciudad
 
-def fueConsultada(ciudad):
-    DatosCiudad=session.get('Ciudad')
-    posicion=0
-    if DatosCiudad:
-        for consulta in DatosCiudad:
-                if consulta[posicion]['ciudad']==ciudad:
-                    return True, posicion
-                    break
-                posicion+=1
-    return False, -2
+# def fueConsultada(ciudad):
+#     DatosCiudad=session.get('Ciudad')
+#     posicion=0
+#     if DatosCiudad:
+#         for consulta in DatosCiudad:
+#                 if consulta[posicion]['ciudad']==ciudad:
+#                     return True, posicion
+#                     break
+#                 posicion+=1
+#     return False, -2
     
 
 # def obtenerDatosCiudad(ciudad):
@@ -213,11 +213,7 @@ def validarCiudad():
     
 
     if ciudad:
-            fue, posicion=fueConsultada(ciudad)
-            if fue:
-                return redirect (url_for('inicio', ciudad=ciudad, fueConsultada=fue, posicion=posicion))
-            else:
-                return redirect (url_for('inicio', ciudad=ciudad))
+            return redirect (url_for('inicio', ciudad=ciudad))
     else:
         return render_template("index.html", mensaje="Ciudad invalida")
 
