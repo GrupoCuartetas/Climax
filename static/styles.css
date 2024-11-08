@@ -1,10 +1,22 @@
-.panelSuperior{
+header{
     display: flex;
     align-items: center;
     align-content: center;
-    height: 5em;
-    width: 100%;
-    margin-top: 0.8rem;
+    justify-content: space-between;
+    height: 12%;
+    margin: 0;
+    background-color: rgb(33, 117, 226);
+}
+footer{
+    background-color: rgb(43, 43, 43);
+    height: 20%;
+}
+button{
+    transition: all .3s ease;
+}
+button:hover{
+    background-color: rgba(62, 107, 255, 0.833);
+    padding-left: 6px;
 }
 img{
     width: 3.5rem;
@@ -15,9 +27,37 @@ img{
     
 }
 .contenido{
+    margin: auto;
     text-align: left;
+    width: 95%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    height:85vh;
     display: flex;
-    margin: 4em;
+    flex-direction: column;
+    align-items: baseline;
+}
+.cielo{
+    align-items: center;
+    display: flex;
+}
+.imgCielo{
+    width: 5.5em;
+    height: 5.5em;
+    margin-left: 2em;
+}
+.detalles{
+    display: flex;
+    align-items: center;
+}
+.separacionDetalles{
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+.imgDetalles{
+    width: 1.5em;
+    height: 1.5em;
 }
 .formMedicion{
     display: flex;
@@ -42,24 +82,23 @@ h1{
     font-weight: bolder;
     font-stretch: expanded;
     font-size: 3.5em;
-    color: rgb(210, 210, 210);
+    color: rgb(255, 250, 205);
     text-align: center;
+    margin:auto;
 
-    width: 90%;
 }
 h2{
-    font-family: math;
+    font-family: monospace;
     font-weight: bold;
     color: rgb(210, 210, 210);
     text-align: left;
-    font-size: 5em;
-    align-items: center;
-    margin-top: 2.5rem;
+    font-size: 7em;
     margin-bottom: 0;
+    margin-top: 0;
 
 }
 h3{
-    font-family: math;
+    font-family: monospace;
     font-weight: bolder;
     font-stretch: expanded;
     font-size: 3.3em;
@@ -70,17 +109,20 @@ h3{
 p{
     margin: 0;
     font-size: 1.7rem;
-    color: rgb(210, 210, 210)
+    color: rgb(210, 210, 210);
+    font-family: monospace;
+
 }
 .ciudadPais{
-    align-items: center;
-    display: inline;
-
+    align-items: flex-start;
+    display: flex;
+    align-content: center;
+    height: 6em;
 }
 body{
     height: 100vh;
     margin: 0;
-    background-image: url(/static/Vector_20180705_009.jpg);
+    background: linear-gradient(to bottom, rgb(34,123,238) 10%, rgb(104,211, 251));
     background-attachment: fixed; 
     background-size: cover;
     background-repeat: no-repeat;
@@ -94,8 +136,6 @@ body{
     text-align: left;
     align-items: center;
     margin: 3rem;
-    margin-top: 6rem;
-
 }
 .boton{
     display: flex;
@@ -107,16 +147,19 @@ body{
     background-color:rgb(210, 210, 210);
     border: 2px;
     border-style: solid;
-    border-color: rgb(189, 189, 201);
+    border-color: rgb(164, 164, 173);
     font-size: 130%;
-    background-color: rgb(90, 151, 255);
+    background: linear-gradient(to bottom, rgba(44, 44, 82, 0.409)40%,rgb(32, 33, 79, 0.2));
     color: rgb(189, 189, 201);
+    transition: 0.3s;
+    
 }
 .boton:hover{
     
-    background-color: rgb(130, 173, 248);
+    background-color: #27357b;
     
 }
+.boton::before
 #queryLog{
     border: hidden;
     display: flex;
@@ -139,24 +182,24 @@ body{
     justify-content: center;
     width: 15rem;
 }
-  .temp{
+.temp{
     width: 8rem;
 }
 .contenedorFormulario{
-
-    height: 80%;
+    height: 90%;
     display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
 }
 .formulario{
-    background-color: rgba(145, 171, 255, 0.267);
+    border-radius: 4%;
+    background: linear-gradient(to bottom, rgba(44, 44, 82, 0.409)40%,rgb(32, 33, 79, 0.2));
     width: 20em;
     height: 25em;
     border: 0.1rem;
     border-style: solid;
-    border-color: rgb(210, 210, 210);
+    border-color: rgb(189, 189, 201);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -182,14 +225,28 @@ button{
     height: 1.5rem;
 }
 a{
-    background-color: rgba(62, 107, 255, 0.5);
-    border: none;
-    color: rgb(210, 210, 210);
-    height: 1.5rem;
-    width: min-content;
-    padding: 0.5rem;
-    text-decoration: none;
-
+    margin: 1em;
+}
+.Pronosticos{
+    display: flex;
+    width: 95%;
+    margin: auto;
+    justify-content: space-between;
+}
+.dias{
+    height: 20em;
+    width: 15em;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 3.5%;
+    margin: 7px;
+    background: rgba(52, 65, 148, 0.33);
+}
+.datos{
+    margin:10px;
+}
+.minYmax{
+    display: flex;
 }
 @media(max-width: 500px){
     h1{

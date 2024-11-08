@@ -7,25 +7,42 @@
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 </head>
 <body>
-    <div class="panelSuperior">
+    <header class="panelSuperior">
         <img src="{{url_for('static', filename='icono.png')}}" alt="Icono WeatherWise" class="icon">
         <h1>WeatherWise</h1>
-        
-    </div>
-    <div class="forecast-container">
+    </header>
+        <h3>{{ciudad}}</h3>
+        <section class="Pronosticos">
         {% for pronostico in pronosticos %}
-            <div class="forecast-block">
-                <div class="imgtemperatura">
-                    <p>{{pronostico.date}}</p>
+            <div class="dias">
+                <div class="diaName">
+                    <h3>{{pronostico.date}}</h3>
                 </div>
-                <div class="temperatura">
-                    <p>{{pronostico.temperature}}{{grados}}</p>
-                    <p>Mín: {{ pronostico.min_temp }}{{grados}}</p>
-                    <p>Máx: {{ pronostico.max_temp }}{{grados}}</p>
+                <div class="datos">
+                    <div class="general">
+                        <div class="gradosEicon">
+                            <p>{{pronostico.temperature}}{{grados}}</p>
+                        </div>
+                        <div class="minYmax">
+                            <p>{{ pronostico.min_temp }}{{grados}}/</p>
+                            <p>{{ pronostico.max_temp }}{{grados}}</p>
+                        </div>
+                    </div>
+                    <div class="detalles">
+                        <div class="detalles">
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="detalles">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         {% endfor %}
-    </div>
-    <a href="{{ url_for('temp',ciudad=ciudad, temperatura=temperatura, pais=pais, max_temp=max_temp, min_temp=min_temp) }}">Volver</a>
+    </section>
+    <a href="{{ request.referrer  }}"><img src="{{url_for('static', filename="back.png")}}" alt=""></a>
 </body>
 </html>
