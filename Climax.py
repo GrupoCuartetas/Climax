@@ -91,15 +91,16 @@ def borrarCaractes(ciudad):
         return ciudad
 
 def fueConsultada(ciudad):
-    global DatosCiudad
+    DatosCiudad=session.get('Ciudad')
     posicion=0
-    for consulta in DatosCiudad:
-        if consulta['ciudad']==ciudad:
-            return True, posicion
-            break
-        posicion+=1
-
-    return False, -2
+    if(DatosCiudad)
+        for consulta in DatosCiudad:
+            if consulta['ciudad']==ciudad:
+                return True, posicion
+                break
+            posicion+=1
+    else
+        return False, -2
     
 
 # def obtenerDatosCiudad(ciudad):
