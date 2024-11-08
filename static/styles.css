@@ -250,7 +250,6 @@ a{
 }
 @media(max-width: 500px){
     body{
-        width: fit-content;
         height: 90dvh;
     }
     h1{
