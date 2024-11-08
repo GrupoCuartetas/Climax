@@ -8,27 +8,49 @@
     
 </head>
 <body>
-    <div class="panelSuperior">
+    <header class="panelSuperior">
         <img src="{{url_for('static', filename='icono.png')}}" alt="Icono WeatherWise" class="icon">
         <h1>WeatherWise</h1>
-        <form action="{{ url_for('cambiar_unidad', ciudad=ciudad.upper(), temperatura=temperatura, pais=pais, maxtemp=maxtemp, mintemp=mintemp) }}" method="POST" class="formMedicion">
+        <form action="{{ url_for('cambiar_unidad', ciudad=ciudad, temperatura=temperatura, pais=pais, maxtemp=maxtemp, mintemp=mintemp) }}" method="POST" class="formMedicion">
             <button type="submit" name="grados" value="metric" class="config">°C</button>
             <button type="submit" name="grados" value="imperial" class="config">°F</button>
         </form>
         
-    </div>
+    </header>
     <div class="contenido">
         <div class="ciudadPais">
-            <h2>{{ciudad}} {{temperatura}}{{grados}}</h2>
-            <p>{{pais}}</p>
-            <p>Max: {{maxtemp}}{{grados}}/Min: {{mintemp}}{{grados}}</p>
+            <div><h2>{{ciudad}}  {{temperatura}}{{gradosAb}}</h2>
+            </div>
+            <div style="margin: 1em;">
+                <p>{{maxtemp}}{{gradosAb}}/{{mintemp}}{{gradosAb}}</p>
+            </div>
+            <div class="cielo">
+                {% if nubosidad == 'Clear' %}
+                <img src="{{ url_for('static', filename='sun.png') }}" alt="Clima despejado" class="imgCielo">
+                {% elif nubosidad == 'Clouds' %}
+                <img src="{{ url_for('static', filename='cloudy.png') }}" alt="Nublado" class="imgCielo">
+                {% elif nubosidad == 'Rain' %}
+                <img src="{{ url_for('static', filename='reiny-day.png') }}" alt="Lluvia" class="imgCielo">
+                {% else %}
+                <img src="" alt="Clima desconocido" class="imgCielo">
+                {% endif %}</div>
+        </div>
+        <p>{{pais}}</p>
+        <div class="detalles">
+            <div class="separacionDetalles">
+                <img src="{{ url_for('static', filename='water-drop.png') }}" alt="" class="imgDetalles">
+                <p>{{humedad}}%</p>
+            </div>
+            <div class="separacionDetalles">
+                <img src="{{ url_for('static', filename='thermometer.png') }}" alt="" class="imgDetalles">
+                <p>{{sensacionT}}{{gradosAb}}</p>
+            </div>
+        </div>
+        <div class="opciones">
+            <a href="{{url_for('mostrar_pronosticos',ciudad=ciudad) }}" class="boton">Pronósticos</a>
+            <a href="{{url_for('mostrar_historial', ciudad=ciudad, temperatura=temperatura, pais=pais, maxtemp=maxtemp, mintemp=mintemp, grados=grados)}}" class="boton">Historial de consultas</a>
+            <a href="{{url_for('inicio')}}" class="boton">Consultar otra ciudad</a>
         </div>
     </div>
-    <div class="opciones">
-        <a href="{{url_for('mostrar_pronosticos',ciudad=ciudad) }}" class="boton">Pronósticos</a>
-        <a href="{{url_for('mostrar_historial')}}" class="boton">Historial de consultas</a>
-        <a href="/" class="boton">Cerrar</a>
-    </div>
-    
 </body>
 </html>

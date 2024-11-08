@@ -7,11 +7,10 @@
   <title>WeatherWise</title>
 </head>
 <body>
-    <div class="panelSuperior">
+    <header class="panelSuperior">
         <img src="{{url_for('static', filename='icono.png')}}" alt="Icono WeatherWise" class="icon">
         <h1>WeatherWise</h1>
-    </div>
-    <h1>Historial de consultas</h1>
+    </header>
     <section id="queryLog">
         {% for consulta in historial %}
         <div class="containLog">
@@ -32,7 +31,7 @@
             </div>
         </div>
         {% endfor %}
-        <a href="{{ url_for('temp',ciudad=ciudad, temperatura=temperatura, pais=pais, max_temp=max_temp, min_temp=min_temp) }}">Volver</a>
+        <a href="{{ request.referrer  }}"><img src="{{url_for('static', filename="back.png")}}" alt=""></a>
     </section>
   
 </body>

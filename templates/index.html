@@ -7,19 +7,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="panelSuperior">
+    <header class="panelSuperior">
         <img src="{{url_for('static', filename='icono.png')}}" alt="Icono WeatherWise" class="icon">
         <h1>WeatherWise</h1>
-    </div>
+    </header>
     <div class="contenedorFormulario">
         <section class="formulario">
             <h3>¡Bienvenido!</h3>
-            <form action="/" method="POST" class="form">
+            <form action="/validacion" method="POST" class="form">
                 <div><label for="ciudad"><p>Ingrese una ciudad</p></label></div>
                 <div> <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" required></div>
-                <div><button type="submit">Consultar Clima</button></div>
+                <div><p style="color:rgb(179, 52, 52);">{{mensaje}}</p></div>
+                <div><button type="submit">Consultar clima</button></div>
             </form>
         </section>
     </div>
+    <footer>
+
+    </footer>
 </body>
 </html>
