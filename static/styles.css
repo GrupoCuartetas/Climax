@@ -249,6 +249,10 @@ a{
     display: flex;
 }
 @media(max-width: 500px){
+    body{
+        width: fit-content;
+        height: 90dvh;
+    }
     h1{
         font-size: 2em;
         font-family: Georgia, 'Times New Roman', Times, serif;
@@ -258,31 +262,43 @@ a{
     }
     h2{
         font-family: math;
-        font-size: 2em;
+        font-size: 3em;
         align-items: flex-start;
     }
     .contenido{
         align-items: start;
+        justify-content: center;
+
     }
     .opciones{
         display: flex;
         justify-content: space-between;
-        width: 75%;
+        width: 90%;
         height: 8em;
         text-align: left;
         align-items: center;
-        margin: 3rem;
-        margin-top: 6rem;
+        margin: 1rem;
     }
     .boton{
-        width: 32%;
-        height: 50%;
-        background-color:rgb(189, 189, 201);
-        border: 1;
+        width: inherit;
         border-style: solid;
         border-color: rgb(189, 189, 201);
-        font-size: 85%;
+        font-size: 20%;
         background-color: rgb(32, 152, 190);
         color: rgb(189, 189, 201);
+    }
+    .ciudadPais{
+        flex-wrap: wrap;
+    }
+    .imgCielo{
+        width: 80px;
+        height: 80px;
+        margin-left: 2em;
+    }
+    .detalles{
+        margin-top: 40px;
+    }
+    p{
+        font-size: 1.3em;
     }
 }

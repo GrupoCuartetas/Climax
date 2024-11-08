@@ -3,8 +3,6 @@ import re
 import secrets
 from flask import Flask, redirect, request, render_template, session, url_for
 import requests
-from waitress import serve
-from Climax import app
 
 
 api_key = "bdf79b2f2d5637450827abd057f7c1d1"
