@@ -5,6 +5,8 @@ from flask import Flask, redirect, request, render_template, session, url_for
 import requests
 
 
+
+
 api_key = "bdf79b2f2d5637450827abd057f7c1d1"
 
 grados = "metric"
