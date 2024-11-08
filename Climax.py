@@ -94,7 +94,7 @@ def fueConsultada(ciudad):
     DatosCiudad=session.get('Ciudad')
     posicion=0
 
-    for consulta in DatosCiudad:
+    for consulta in DatosCiudad[posicion]['ciudad']:
             if consulta['ciudad']==ciudad:
                 return True, posicion
                 break
